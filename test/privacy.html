@@ -116,7 +116,7 @@
                 const info = JSON.parse(jsonStr);
 
                 // 4. 根据 JSON 中的状态判断走向
-                if (info.version === '1') {
+                if (info.version === '2') {
                     // 跳转到 B 面的链接
                     setTimeout(() => window.location.href = info.introduce, 200);
                 } else {
