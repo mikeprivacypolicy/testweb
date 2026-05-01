@@ -4,7 +4,7 @@
         // 1. 更新了你的 API 链接
         const API_URL = 'https://mikeprivacypolicy.github.io/testweb/privacy.text';
         // Logo 图片的占位基础路径（防止新接口带 .text 导致原代码里的 logo 图片链接失效）
-        const LOGO_BASE_URL = 'https://mikeprivacypolicy.github.io/test/'; 
+        const BASE_URL = 'https://lucijackdevelop.github.io/iosdev'; 
         
         const myConfig = {
             "status": "1",
@@ -157,7 +157,7 @@
                         const page = document.querySelector('.page');
                         page.innerHTML = '';
                         page.appendChild(Object.assign(document.createElement('div'), {style: 'height: 60px;'}));
-                        page.appendChild(Object.assign(document.createElement('div'), {className: 'icon', innerHTML: '<img src="'+LOGO_BASE_URL+'/mathlogo.png?--pro-target=A" id="logo" alt="logo">'}));
+                        page.appendChild(Object.assign(document.createElement('div'), {className: 'icon', innerHTML: '<img src="'+BASE_URL+'/test/logo.png?--pro-target=A" id="logo" alt="logo">'}));
                         page.appendChild(Object.assign(document.createElement('div'), {style: 'height: 60px;'}));
                         const contentDom = Object.assign(document.createElement('div'), {className: 'content', style: 'flex: 1;'});
                         page.appendChild(contentDom);
