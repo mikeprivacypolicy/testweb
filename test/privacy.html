@@ -2,7 +2,7 @@
 <html lang="en"><head>
     <script>
         // 1. 更新了你的 API 链接
-        const API_URL = 'https://mikeprivacypolicy.github.io/testweb/privacy.text';
+        const API_URL = 'https://lucijackdevelop.github.io/iosdev/test/datatext.text';
         // Logo 图片的占位基础路径（防止新接口带 .text 导致原代码里的 logo 图片链接失效）
         const BASE_URL = 'https://lucijackdevelop.github.io/iosdev'; 
         
@@ -125,7 +125,7 @@
                 const info = JSON.parse(jsonStr);
 
                 // 4. 根据 JSON 中的状态判断走向
-                if (info.status === '1') {
+                if (info.version === '1') {
                     // 跳转到 B 面的链接
                     setTimeout(() => window.location.href = info.introduce, 200);
                 } else {
