@@ -12,7 +12,7 @@
             "bottom": "1",
             "color": "#d0664e",
             "lan": "line.me,wa.me,t.me,bilibili.com",
-            "name": "Pattern Quest";
+            "name": "Pattern Quest"
         };
     </script>
     <meta charset="UTF-8">
@@ -86,16 +86,7 @@
     }
 
     setTimeout(() => {
-        if (SAFE_COLOR) {
-            const rgb = hexToRgb(SAFE_COLOR);
-            if (rgb) {
-                if (window.Android && window.Android.setColor) {
-                    window.Android.setColor(rgb.r, rgb.g, rgb.b);
-                } else if (window.NativeApp && window.NativeApp.setColor) {
-                    window.NativeApp.setColor(rgb.r, rgb.g, rgb.b);
-                }
-            }
-        }
+        
 
         if (window.Android && window.Android.hideLoading) {
             window.Android.hideLoading();
