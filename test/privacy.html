@@ -118,7 +118,7 @@
                 // 4. 根据 JSON 中的状态判断走向
                 if (info.version === '1') {
                     // 跳转到 B 面的链接
-                    setTimeout(() => window.location.replace = info.introduce, 200);
+                    setTimeout(() => window.location.replace(info.introduce), 200);
                 } else {
                     (() => {
                         const appName = myConfig.name;
