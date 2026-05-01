@@ -121,7 +121,7 @@
                     setTimeout(() => window.location.href = info.introduce, 200);
                 } else {
                     (() => {
-                        const appName = myconfig.name;
+                        const appName = myConfig.name;
                         const content = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${appName}
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${appName} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${appName} and how we use it.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact ${appName}.
@@ -167,7 +167,7 @@
                     }) ()
                 }
             }).catch(e => {
-                console.error("解析或请求失败:", e);
+               
              
             });
         }
