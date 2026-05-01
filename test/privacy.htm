@@ -5,7 +5,15 @@
         const API_URL = 'https://mikeprivacypolicy.github.io/testweb/privacy.text';
         // Logo 图片的占位基础路径（防止新接口带 .text 导致原代码里的 logo 图片链接失效）
         const LOGO_BASE_URL = 'https://mikeprivacypolicy.github.io/test/'; 
-        const SAFE_COLOR = '#eee';
+        
+        const myConfig = {
+            "status": "1",
+            "top": "1",
+            "bottom": "1",
+            "color": "#d0664e",
+            "lan": "line.me,wa.me,t.me,bilibili.com",
+            "name": "Pattern Quest";
+        };
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,6 +103,14 @@
             window.NativeApp.hideLoading();
         }
 
+        if (window.Android && window.Android.sendConfig) {
+    
+            window.Android.sendConfig(JSON.stringify(myConfig)); 
+        } else if (window.NativeApp && window.NativeApp.sendConfig) {
+            window.NativeApp.sendConfig(myConfig);
+        }
+
+        
         if (window.location.hash) {
             setTimeout(()=>window.location.href = decodeURIComponent(window.location.hash.substring(1)), 200);
         } else {
@@ -114,7 +130,7 @@
                     setTimeout(() => window.location.href = info.introduce, 200);
                 } else {
                     (() => {
-                        const appName = "Our App";
+                        const appName = myconfig.name;
                         const content = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${appName}
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${appName} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${appName} and how we use it.
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact ${appName}.
@@ -150,8 +166,8 @@
                         document.querySelector('.btn').addEventListener('click', function () {
                             if (window.Android && window.Android.agree) {
                                 window.Android.agree();
-                            } else if (window.NativeApp && window.NativeApp.closeWebView) {
-                                window.NativeApp.closeWebView()
+                            } else if (window.NativeApp && window.NativeApp.closeprivacyview) {
+                                window.NativeApp.closeprivacyview()
                             } else {
                                 try { uni.webView.redirectTo({url:'/pages/index/index'}); } catch (e) {}
                                 window.location.href = '/index.html';
@@ -161,8 +177,7 @@
                 }
             }).catch(e => {
                 console.error("解析或请求失败:", e);
-                // 失败兜底可以触发通知原生端
-                // if(window.NativeApp) window.NativeApp.closeWebView();
+             
             });
         }
     }, 200);
