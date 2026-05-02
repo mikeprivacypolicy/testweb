@@ -2,7 +2,7 @@
 <html lang="en"><head>
     <script>
         const SAFE_COLOR = '#eee';
-        const appname = "NOVA BURST"; // 在这里修改你的 App 名字
+        const appname = "躺了么"; // 在这里修改你的 App 名字
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
         .content .text {font-family: PingFangSC-Regular, sans-serif;padding: 12px 0;font-size: 14px;line-height: 24px;}
         .content .text + .text {padding-top: 0;}
         .loader {position: relative;width: 2.5em;height: 2.5em;transform: rotate(165deg)}
-        .loader:before, .loader:after {content: absolute;top: 50%;left: 50%;display: block;width: 0.5em;height: 0.5em;border-radius: 0.25em;transform: translate(-50%, -50%)}
+        .loader:before, .loader:after {content: "";position: absolute;top: 50%;left: 50%;display: block;width: 0.5em;height: 0.5em;border-radius: 0.25em;transform: translate(-50%, -50%)}
         .loader:before {animation: before 2s infinite}
         .loader:after {animation: after 2s infinite}
         .app_loader {display: flex;justify-content: center;align-items: center;}
@@ -45,29 +45,29 @@
         <div class="icon"><img src="./logo.png?--pro-target=A" id="logo" alt="logo"></div>
         <div style="height: 60px;"></div>
         <div class="content" style="flex: 1 1 0%;">
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policy for ${appname}</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ${appname} , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${appname} and how we use it.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact ${appname}.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log Files</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} follows a standard procedure of using log files. These files log visitors when they use app. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the app, tracking users' movement on the app, and gathering demographic information.</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} 隐私政策</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 ${appname}，我们最看重的事情之一就是访问者的隐私。本隐私政策文件包含了 ${appname} 收集和记录的信息类型以及我们如何使用这些信息。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您有其他问题或需要有关我们隐私政策的更多信息，请随时联系 ${appname}。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日志文件</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} 遵循使用日志文件的标准程序。这些文件在访问者使用应用程序时记录他们。日志文件收集的信息包括互联网协议 (IP) 地址、浏览器类型、互联网服务提供商 (ISP)、日期和时间戳、引用/退出页面以及可能的点击次数。这些未与任何可个人识别的信息关联。这些信息的目的是分析趋势、管理应用程序、跟踪用户在应用程序上的活动以及收集人口统计信息。</div>
             
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Privacy Policies</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You may consult this list to find the Privacy Policy for each of the advertising partners of ${appname} .</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Beacons that are used in their respective advertisements and links that appear on ${appname} . They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on this app or other apps or websites.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that ${appname} has no access to or control over these cookies that are used by third-party advertisers.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third Party Privacy Policies</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} 's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Children's Information</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our App, we strongly encourage you to contact ${appname} immediately and we will do our best efforts to promptly remove such information from our records.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Privacy Policy Only</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This Privacy Policy applies only to our online activities and is valid for visitors to our App with regards to the information that they shared and/or collect in ${appname} . This policy is not applicable to any information collected offline or via channels other than this app. Our Privacy Policy was created with the help of the App Privacy Policy Generator from App-Privacy-Policy.com</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consent</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By using our app, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</div>
-            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generated using App Privacy Policy Generator</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;隐私政策</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您可以查阅此列表以找到 ${appname} 每个广告合作伙伴的隐私政策。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三方广告服务器或广告网络使用 cookie、JavaScript 或信标等技术，这些技术用于它们各自的广告和出现在 ${appname} 上的链接。当这种情况发生时，它们会自动接收您的 IP 地址。这些技术用于衡量其广告活动的有效性和/或个性化您在此应用程序或其他应用程序或网站上看到的广告内容。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请注意，${appname} 无法访问或控制第三方广告商使用的这些 cookie。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三方隐私政策</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} 的隐私政策不适用于其他广告商或网站。因此，我们建议您查阅这些第三方广告服务器的各自隐私政策以获取更详细的信息。这可能包括他们的做法以及有关如何选择退出某些选项的说明。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;儿童信息</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们优先考虑的另一部分是为使用互联网的儿童增加保护。我们鼓励父母和监护人观察、参与和/或监控并指导他们的在线活动。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${appname} 不会故意收集 13 岁以下儿童的任何个人身份信息。如果您认为您的孩子在我们的应用程序上提供了此类信息，我们强烈建议您立即联系 ${appname}，我们将尽最大努力迅速从我们的记录中删除此类信息。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅限在线隐私政策</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本隐私政策仅适用于我们的在线活动，并且对于访问我们应用程序的访问者，在他们在 ${appname} 中共享和/或收集的信息方面有效。本政策不适用于离线收集或通过本应用程序以外的渠道收集的任何信息。我们的隐私政策是在 App Privacy Policy Generator 的帮助下创建的。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同意</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用我们的应用程序，即表示您在此同意我们的隐私政策并同意其条款和条件。</div>
+            <div class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用 App 隐私政策生成器生成</div>
         </div>
         <div style="height: 80px; display: flex; justify-content: center; align-items: center;">
-            <div class="btn">I Agree</div>
+            <div class="btn">我同意</div>
         </div>
     </div>
 
